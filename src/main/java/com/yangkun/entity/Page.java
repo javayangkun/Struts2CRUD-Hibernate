@@ -28,4 +28,84 @@ public class Page<T> {
 
 	}
 
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
+	public Integer getP() {
+		return p;
+	}
+
+	public void setP(Integer p) {
+		this.p = p;
+	}
+
+	public Integer getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(Integer rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	public Integer getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(Integer maxPage) {
+		this.maxPage = maxPage;
+	}
+
+	public Integer getPrev() {
+		return prev;
+	}
+
+	public void setPrev(Integer prev) {
+		this.prev = prev;
+	}
+
+	public Integer getNext() {
+		return next;
+	}
+
+	public void setNext(Integer next) {
+		this.next = next;
+	}
+
+	public Integer getStartLine() {
+		return startLine;
+	}
+
+	public void setStartLine(Integer startLine) {
+		this.startLine = startLine;
+	}
+
+	public Integer getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(Integer startPage) {
+		this.startPage = startPage;
+	}
+
+	public Integer getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(Integer endPage) {
+		this.endPage = endPage;
+	}
+
+	public List<T> getList() {
+		return list;
+	}
+
+	public void setList(List<T> list) {
+		this.list = list;
+	}
+
 }
