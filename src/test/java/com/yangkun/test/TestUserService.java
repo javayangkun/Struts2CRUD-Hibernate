@@ -1,17 +1,18 @@
 package com.yangkun.test;
 
-import static org.junit.Assert.*;
-
 import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
 
+import com.yangkun.dao.impl.UserDaoImpl;
+import com.yangkun.entity.Page;
 import com.yangkun.entity.User;
 import com.yangkun.service.impl.UserServiceImpl;
 
 public class TestUserService {
 	private static UserServiceImpl userService = new UserServiceImpl();
+	private static UserDaoImpl userDao = new UserDaoImpl();
 	@Test
 	public void testSave() {
 		//succeed
@@ -56,7 +57,13 @@ public class TestUserService {
 
 	@Test
 	public void testFindPageData() {
-		fail("Not yet implemented");
+		Page<User> pageData = userService.findPageData(0, 5);
+		System.out.println(pageData);
 	}
 
+	@Test
+	public void testGetRowCount() {
+		int rowCount = userDao.getRowCount();
+		System.out.println(rowCount);
+	}
 }

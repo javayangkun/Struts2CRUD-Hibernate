@@ -11,12 +11,12 @@ import com.yangkun.utils.HiBernateUtil;
 
 public class UserDaoImpl implements IUserDao {
 	// 1.创建会话对象
-	private Session s = HiBernateUtil.openSession();
 
 	@Override
 	public void save(User user) {
 		// TODO save User
 		// 开始事务
+		Session s = HiBernateUtil.openSession();
 		s.beginTransaction();
 		// ==================================================
 		s.save(user);
@@ -31,6 +31,7 @@ public class UserDaoImpl implements IUserDao {
 	public void delete(Integer id) {
 		// TODO delete User by User`s id
 		// 开始事务
+		Session s = HiBernateUtil.openSession();
 		s.beginTransaction();
 		// ==================================================
 		User user = new User();
@@ -44,6 +45,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public void update(User user) {
 		// 开始事务
+		Session s = HiBernateUtil.openSession();
 		s.beginTransaction();
 		// ==================================================
 		s.update(user);
@@ -56,6 +58,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<User> find() {
 		// TODO list all users
+		Session s = HiBernateUtil.openSession();
 		String hql = "from User";
 		// 开始事务
 		s.beginTransaction();
@@ -74,6 +77,7 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public User find(Integer id) {
 		// 开始事务
+		Session s = HiBernateUtil.openSession();
 		s.beginTransaction();
 		// ==================================================
 		User user = s.get(User.class, id);
@@ -86,14 +90,38 @@ public class UserDaoImpl implements IUserDao {
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		Session s = HiBernateUtil.openSession();
+		s.beginTransaction();
+		//===================================================
+		String hql = "SELECT COUNT(id) FROM User";
+		@SuppressWarnings("rawtypes")
+		Query query = s.createQuery(hql);
+		//返回的实际类型为Long型
+		Object result = query.uniqueResult();
+		//强转为Long,然后转为int类型
+		Long rowCount = (Long) result;
+		//===================================================
+		s.getTransaction();
+		s.close();
+		return rowCount.intValue();
 	}
 
 	@Override
 	public List<User> find(int startLine, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		Session s = HiBernateUtil.openSession();
+		s.beginTransaction();
+		//=====================================================
+		String hql = "from User";
+		@SuppressWarnings("rawtypes")
+		Query query = s.createQuery(hql);
+		query.setFirstResult(startLine);
+		query.setMaxResults(size);
+		@SuppressWarnings("unchecked")
+		List<User> users = query.list();
+		//=====================================================
+		s.getTransaction().commit();
+		s.close();
+		return users;
 	}
 
 }

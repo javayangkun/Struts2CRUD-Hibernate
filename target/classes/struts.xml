@@ -7,10 +7,13 @@
 	<!-- 声明开发模式 -->
 	<constant name="struts.devMode" value="false"></constant>
 	<!--声明包 -->
-	<package name="default" extends="struts-default" strict-method-invocation="false">
-		<action name="*_*" class="com.yangkun.web.action.{1}Action" method="{2}">
+	<package name="default" extends="struts-default"
+		strict-method-invocation="false">
+		<action name="*_*" class="com.yangkun.web.action.{1}Action"
+			method="{2}">
 			<result name="find" type="redirectAction">{1}_find</result>
 			<result name="findUI" type="dispatcher">/findUI.jsp</result>
+			<result name="updateUI" type="dispatcher">/updateUI.jsp</result>
 		</action>
 	</package>
 </struts>

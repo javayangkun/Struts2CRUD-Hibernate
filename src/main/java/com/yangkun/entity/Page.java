@@ -25,7 +25,33 @@ public class Page<T> {
 			p = maxPage;
 		if (p < 1)
 			p = 1;
+		// 求出上一页和下一页
+		prev = p - 1;
+		next = p + 1;
+		// 求出起始行,为分页查询做准备
+		startLine = (p - 1) * size;
 
+		// 下面这个是仿照百度的分页栏
+		// 根据总页数来判断起始页和结束页
+		if (maxPage < 10) {
+			// 当总页数小于10页的时候
+			startPage = 1;
+			endPage = 10;
+		} else {
+			// 当总页数大于10页的时候
+			startPage = p - 5;
+			endPage = p + 4;
+			// 如果起始页小于1
+			if (startPage < 1) {
+				startPage = 1;
+				endPage = 10;
+			}
+
+			if (endPage > maxPage) {
+				startPage = maxPage - 9;
+				endPage = maxPage;
+			}
+		}
 	}
 
 	public Integer getSize() {
@@ -106,6 +132,13 @@ public class Page<T> {
 
 	public void setList(List<T> list) {
 		this.list = list;
+	}
+
+	@Override
+	public String toString() {
+		return "Page [size=" + size + ", p=" + p + ", rowCount=" + rowCount + ", maxPage=" + maxPage + ", prev=" + prev
+				+ ", next=" + next + ", startLine=" + startLine + ", startPage=" + startPage + ", endPage=" + endPage
+				+ ", list=" + list + "]";
 	}
 
 }

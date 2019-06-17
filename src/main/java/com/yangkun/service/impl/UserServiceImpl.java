@@ -41,8 +41,14 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public Page<User> findPageData(int p, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		//TODO init Page and return Page
+		int rowCount = userDao.getRowCount();
+		//获取初始化过的Page对象
+		Page<User> page = new Page<>(size,p,rowCount);
+		//将数据page对象封装进list集合
+		List<User> list = userDao.find(page.getStartLine(), page.getSize());
+		page.setList(list);
+		return page;
 	}
 
 }
